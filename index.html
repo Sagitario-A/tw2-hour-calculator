@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planificador de Ataques - Tribal Wars 2</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Planificador de Ataques - Tribal Wars 2</h1>
+        
+        <!-- Configuración General -->
+        <div id="global-config" class="section">
+            <h2>Configuración General</h2>
+            <div class="form-group">
+                <label for="world-speed">Velocidad del Mundo:</label>
+                <input type="number" id="world-speed" min="0.1" step="0.1" value="1.0">
+            </div>
+            <div class="form-group">
+                <label for="unit-speed">Velocidad de Unidades:</label>
+                <input type="number" id="unit-speed" min="0.1" step="0.1" value="1.0">
+            </div>
+            <div class="form-group">
+                <label for="arrival-time">Hora de Llegada Deseada:</label>
+                <input type="datetime-local" id="arrival-time">
+            </div>
+            <div class="form-group">
+                <label for="simultaneous-arrival">¿Llegar a la vez?</label>
+                <input type="checkbox" id="simultaneous-arrival" checked>
+            </div>
+            <div class="form-group" id="stagger-time-container" style="display: none;">
+                <label for="stagger-time">Diferencia entre llegadas (segundos):</label>
+                <input type="number" id="stagger-time" min="1" step="1" value="5">
+            </div>
+        </div>
+        
+        <!-- Pueblo de Destino -->
+        <div id="target-village" class="section">
+            <h2>Pueblo de Destino</h2>
+            <div class="form-group">
+                <label for="target-coord-x">Coordenada X:</label>
+                <input type="number" id="target-coord-x" min="0" step="1">
+            </div>
+            <div class="form-group">
+                <label for="target-coord-y">Coordenada Y:</label>
+                <input type="number" id="target-coord-y" min="0" step="1">
+            </div>
+            <div class="form-group">
+                <label for="target-name">Nombre (Opcional):</label>
+                <input type="text" id="target-name" placeholder="Nombre del pueblo destino">
+            </div>
+        </div>
+        
+        <!-- Pueblos de Origen -->
+        <div id="origin-villages" class="section">
+            <h2>Pueblos de Origen</h2>
+            
+            <!-- Plantilla para una entrada de pueblo de origen -->
+            <div class="origin-entry">
+                <div class="origin-header">
+                    <h3>Pueblo de Origen</h3>
+                    <button class="delete-origin">Eliminar</button>
+                    <span class="drag-handle">≡</span>
+                </div>
+                
+                <div class="form-group">
+                    <label>Coordenadas:</label>
+                    <div class="coord-inputs">
+                        <input type="number" class="origin-coord-x" min="0" step="1" placeholder="X">
+                        <span>|</span>
+                        <input type="number" class="origin-coord-y" min="0" step="1" placeholder="Y">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label>Nombre (Opcional):</label>
+                    <input type="text" class="origin-name" placeholder="Nombre del pueblo origen">
+                </div>
+                
+                <div class="form-group">
+                    <label>Unidad Más Lenta:</label>
+                    <select class="slowest-unit">
+                        <option value="1080">Lancero (18:00 min/campo)</option>
+                        <option value="1320">Espadachín (22:00 min/campo)</option>
+                        <option value="840">Guerrero con Hacha (14:00 min/campo)</option>
+                        <option value="840">Arquero (14:00 min/campo)</option>
+                        <option value="480">Caballería Ligera (08:00 min/campo)</option>
+                        <option value="480">Arquero Montado (08:00 min/campo)</option>
+                        <option value="540">Caballería Pesada (09:00 min/campo)</option>
+                        <option value="1440">Ariete (24:00 min/campo)</option>
+                        <option value="1440">Catapulta (24:00 min/campo)</option>
+                        <option value="840">Berserker (14:00 min/campo)</option>
+                        <option value="3000">Trebuchet (50:00 min/campo)</option>
+                        <option value="2100">Noble (35:00 min/campo)</option>
+                        <option value="480">Paladín (08:00 min/campo)</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label>Nivel de Disciplina:</label>
+                    <select class="discipline-level">
+                        <option value="0.00">Ninguna (0%)</option>
+                        <option value="0.33">Nivel 1 (+33%)</option>
+                        <option value="0.66">Nivel 2 (+66%)</option>
+                        <option value="0.99">Nivel 3 (+99%)</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label>Tipo:</label>
+                    <select class="attack-type">
+                        <option value="attack">Ataque</option>
+                        <option value="support">Apoyo</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label>Tiempo de Viaje:</label>
+                    <div class="travel-time-output">--:--:--</div>
+                </div>
+                
+                <div class="form-group">
+                    <label>Hora de Envío:</label>
+                    <div class="send-time-output">--:--:--</div>
+                </div>
+            </div>
+            
+            <!-- Botón para añadir nuevo origen -->
+            <button id="add-origin" class="add-button">Añadir Origen</button>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html> 
